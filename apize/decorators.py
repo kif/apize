@@ -17,7 +17,6 @@ def send_request(url, method,
 		
 	try:
 		if data:
-			data = json.dumps(data)
 			request = requests.Request(method.upper(), url, 
 				data=data, headers=headers, cookies=cookies)
 		else:

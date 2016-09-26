@@ -4,7 +4,7 @@ from __future__ import absolute_import
 
 import json
 import requests
-from .exceptions import *
+from exceptions import *
 
 
 def send_request(url, method, data, params, headers, cookies):
@@ -28,10 +28,22 @@ def send_request(url, method, data, params, headers, cookies):
 		raise UnknowMethod(str(method))
 	
 	r.close()
-
+	
+	try:
+		content_type = r.headers.get('Content-Type', 'application/json')
+		response = r.json()
+		isjson = True
+		
+	except json.decoder.JSONDecodeError:
+		content_type = r.headers.get('Content-Type', 'text/html')
+		response = r.text
+		isjson = False
+	
 	return {
-		'data': r.json(), 
-		'status': r.status_code
+		'data': response,
+		'content_type': content_type, 
+		'status': r.status_code,
+		'is_json': isjson
 	}
 
 

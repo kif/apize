@@ -36,12 +36,19 @@ if __name__ == "__main__":
 	print(response['data'])
 ```
 
-More examples on Examples/ directory.
+More examples on __examples/__ directory.
 
-Dict (returned) accept:
+Argument __dict__ accept:
 
 * params.
 * data.
 * headers.
 * cookies.
+
+Response __dict__:
+
+* data - body HTTPResponse (dict if is_json == True)
+* content_type - MIME types
+* status - status code HTTP
+* is_json - boolean
 

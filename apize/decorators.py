@@ -4,31 +4,39 @@ from __future__ import absolute_import
 
 import json
 import requests
-from exceptions import *
+from .exceptions import *
 
 
-def send_request(url, method, data, params, headers, cookies):
+def send_request(url, method, 
+	data, params, headers, cookies, timeout):
 	"""
 	Forge and send HTTP request.
 	"""
 	for p in params:
 		url = url.replace(':'+p, str(params[p]))
+		
+	try:
+		if data:
+			data = json.dumps(data)
+			request = requests.Request(method.upper(), url, 
+				data=data, headers=headers, cookies=cookies)
+		else:
+			request = requests.Request(method.upper(), url,
+				headers=headers, cookies=cookies)
+		
+		## Prepare and send HTTP request.
+		session = requests.Session()
+		r = session.send(request.prepare(), timeout=timeout)
+		
+	except requests.exceptions.Timeout:
+		return {
+			'data': {}, 
+			'content_type': '', 
+			'status': 0, 
+			'is_json': False,
+			'timeout': True
+		}
 
-	methodLowerCase = method.lower()
-	
-	if methodLowerCase == 'get':
-		r = requests.get(url, headers=headers, cookies=cookies)
-	elif methodLowerCase == 'post':
-		r = requests.post(url, data=data, headers=headers, cookies=cookies)
-	elif methodLowerCase == 'put':
-		r = requests.put(url, data=data, headers=headers, cookies=cookies)
-	elif methodLowerCase == 'delete':
-		r = requests.delete(url, headers=headers, cookies=cookies)
-	else:
-		raise UnknowMethod(str(method))
-	
-	r.close()
-	
 	try:
 		content_type = r.headers.get('Content-Type', 'application/json')
 		response = r.json()
@@ -43,7 +51,8 @@ def send_request(url, method, data, params, headers, cookies):
 		'data': response,
 		'content_type': content_type, 
 		'status': r.status_code,
-		'is_json': isjson
+		'is_json': isjson,
+		'timeout': False
 	}
 
 
@@ -58,20 +67,12 @@ def apize(url, method='GET'):
 			if type(elem) is not dict:
 				raise BadReturnVarType(func.__name__)
 			
-			if not 'data' in elem:
-				elem['data'] = {}
-			if not 'params' in elem:
-				elem['params'] = {}
-			if not 'headers' in elem:
-				elem['headers'] = {}
-			if not 'cookies' in elem:
-				elem['cookies'] = {} 
-			
 			response = send_request(url, method, 
-				json.dumps(elem['data']), 
-				elem['params'],
-				elem['headers'],
-				elem['cookies']
+				elem.get('data', {}), 
+				elem.get('params', {}),
+				elem.get('headers', {}),
+				elem.get('cookies', {}),
+				elem.get('timeout', 8),
 			)
 			
 			return response

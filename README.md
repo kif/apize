@@ -2,7 +2,7 @@
 
 ### Installation
 
-```
+```bash
 pip install apize
 ```
 
@@ -44,11 +44,13 @@ Argument __dict__ accept:
 * data.
 * headers.
 * cookies.
+* timeout (int), default 8 seconds.
 
 Response __dict__:
 
-* data - body HTTPResponse (dict if is_json == True)
-* content_type - MIME types
-* status - status code HTTP
-* is_json - boolean
+* data:  body HTTPResponse (dict if is_json == True)
+* content_type:  MIME types
+* status:  status code HTTP
+* is_json:  boolean
+* timeout:  boolean (if requests.exceptions.Timeout is raised).
 

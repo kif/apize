@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='apize',
-	version = '0.0.3',
+	version = '0.0.4',
 	author = 'herrersystem',
 	author_email = 'anton.millescamps@evhunter.fr',
 	
@@ -13,7 +13,7 @@ setup(name='apize',
 	install_requires = ['requests'],
 	
 	classifiers=[
-		'Development Status :: 3 - Alpha',
+		'Development Status :: 4 - Beta',
 		'License :: OSI Approved :: MIT License',
 		'Programming Language :: Python :: 3',
 		'Programming Language :: Python :: 3.4',

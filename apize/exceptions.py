@@ -9,9 +9,3 @@ class BadReturnVarType(Exception):
 			"'%s' function must be return a dict." % func
 		)
 
-
-class UnknowMethod(Exception):
-	def __init__(self, method):
-		Exception.__init__(self,
-			"Unknow '%s' HTTP method." % method
-		)

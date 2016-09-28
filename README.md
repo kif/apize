@@ -45,6 +45,7 @@ Argument __dict__ accept:
 * headers.
 * cookies.
 * timeout (int), default 8 seconds.
+* is_json (boolean), if data must be convert to json.
 
 Response __dict__:
 

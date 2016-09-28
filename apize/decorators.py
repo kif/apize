@@ -8,7 +8,7 @@ from .exceptions import *
 
 
 def send_request(url, method, 
-	data, params, headers, cookies, timeout):
+	data, params, headers, cookies, timeout, is_json):
 	"""
 	Forge and send HTTP request.
 	"""
@@ -17,6 +17,9 @@ def send_request(url, method,
 		
 	try:
 		if data:
+			if is_json:
+				data = json.dumps(data)
+				
 			request = requests.Request(method.upper(), url, 
 				data=data, headers=headers, cookies=cookies)
 		else:
@@ -72,6 +75,7 @@ def apize(url, method='GET'):
 				elem.get('headers', {}),
 				elem.get('cookies', {}),
 				elem.get('timeout', 8),
+				elem.get('is_json', False)
 			)
 			
 			return response

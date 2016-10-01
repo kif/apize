@@ -4,6 +4,7 @@ from __future__ import absolute_import
 
 import json
 import requests
+from http.cookiejar import CookieJar
 from .exceptions import *
 
 
@@ -33,6 +34,7 @@ def send_request(url, method,
 	except requests.exceptions.Timeout:
 		return {
 			'data': {}, 
+			'cookies': CookieJar(),
 			'content_type': '', 
 			'status': 0, 
 			'is_json': False,
@@ -51,6 +53,7 @@ def send_request(url, method,
 	
 	return {
 		'data': response,
+		'cookies': r.cookies,
 		'content_type': content_type, 
 		'status': r.status_code,
 		'is_json': isjson,

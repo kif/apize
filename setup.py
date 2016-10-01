@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='apize',
-	version = '0.0.6',
+	version = '0.0.7',
 	author = 'herrersystem',
 	author_email = 'anton.millescamps@evhunter.fr',
 	

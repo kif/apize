@@ -8,7 +8,7 @@ setup(name='apize',
 	url = "http://github.com/herrersystem/apize",
 	keywords = 'apize',
 	description = 'Write API client (quickly and simply)',
-	license = 'MIT',
+	license = 'GPLv3',
 	packages = ['apize'],
 	install_requires = ['requests'],
 	

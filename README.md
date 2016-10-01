@@ -21,18 +21,18 @@ API_KEY = 'hfbehbf...'
 API = 'https://maps.googleapis.com/maps/api/place'
 
 
-@apize(API + '/autocomplete/json?input=:input&key=:key&types=:types')
-def autocomplete_place(entry):
+@apize(API + '/autocomplete/json')
+def autocomplete_place(query):
 	'''
 	https://developers.google.com/places/web-service/autocomplete
 	'''
-	args = {
-		'input': entry,
+	params = {
+		'input': query,
 		'key': API_KEY,
 		'types': '(cities)'
 	}
 	
-	return {'args': args}
+	return {'params': params}
 
 
 if __name__ == "__main__":

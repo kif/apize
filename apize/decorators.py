@@ -9,11 +9,11 @@ from .exceptions import *
 
 
 def send_request(url, method, 
-	data, params, headers, cookies, timeout, is_json):
+	data, args, params, headers, cookies, timeout, is_json):
 	"""
 	Forge and send HTTP request.
 	"""
-	for p in params:
+	for p in args:
 		url = url.replace(':'+p, str(params[p]))
 		
 	try:
@@ -21,11 +21,11 @@ def send_request(url, method,
 			if is_json:
 				data = json.dumps(data)
 				
-			request = requests.Request(method.upper(), url, 
-				data=data, headers=headers, cookies=cookies)
+			request = requests.Request(method.upper(), url, data=data, 
+				params=params,headers=headers, cookies=cookies)
 		else:
-			request = requests.Request(method.upper(), url,
-				headers=headers, cookies=cookies)
+			request = requests.Request(method.upper(), url, 
+				params=params, headers=headers, cookies=cookies)
 		
 		## Prepare and send HTTP request.
 		session = requests.Session()
@@ -73,7 +73,8 @@ def apize(url, method='GET'):
 				raise BadReturnVarType(func.__name__)
 			
 			response = send_request(url, method, 
-				elem.get('data', {}), 
+				elem.get('data', {}),
+				elem.get('args', {}),
 				elem.get('params', {}),
 				elem.get('headers', {}),
 				elem.get('cookies', {}),
@@ -85,4 +86,3 @@ def apize(url, method='GET'):
 		return wrapper
 		
 	return decorator
-

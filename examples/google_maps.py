@@ -6,13 +6,13 @@ API_KEY = 'hfbehbf...'
 API = 'https://maps.googleapis.com/maps/api/place'
 
 
-@apize(API + '/autocomplete/json?input=:input&key=:key&types=:types')
-def autocomplete_place(entry):
+@apize(API + '/autocomplete/json')
+def autocomplete_place(query):
 	'''
 	https://developers.google.com/places/web-service/autocomplete
 	'''
 	params = {
-		'input': entry,
+		'input': query,
 		'key': API_KEY,
 		'types': '(cities)'
 	}
@@ -21,7 +21,7 @@ def autocomplete_place(entry):
 
 
 
-@apize(API + '/add/json?key=:key', method='POST')
+@apize(API + '/add/json', method='POST')
 def add_place():
 	'''
 	https://developers.google.com/places/web-service/add-place

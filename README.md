@@ -26,13 +26,13 @@ def autocomplete_place(entry):
 	'''
 	https://developers.google.com/places/web-service/autocomplete
 	'''
-	params = {
+	args = {
 		'input': entry,
 		'key': API_KEY,
 		'types': '(cities)'
 	}
 	
-	return {'params': params}
+	return {'args': args}
 
 
 if __name__ == "__main__":
@@ -46,7 +46,8 @@ More examples on __examples/__ directory.
 
 Argument __dict__ accept:
 
-* params.
+* params (params in url ex: ?v=10).
+* args (args to parse in url ex: /solid/:rock).
 * data.
 * headers.
 * cookies.

@@ -3,21 +3,20 @@ from setuptools import setup
 
 setup(
 	name = 'apize',
-	version = '0.0.7',
+	version = '0.0.8',
 	author = 'herrersystem',
 	author_email = 'anton.millescamps@evhunter.fr',
-	
-	url = "http://github.com/herrersystem/apize",
-	keywords = 'apize',
+	url = 'http://github.com/herrersystem/apize',
+	keywords = 'apize api client',
 	description = 'Write quickly and easily to API clients',
-	license = 'GPLv3',
+	license = 'GNU General Public License (GPL)',
 	packages = ['apize'],
 	install_requires = ['requests'],
 	
 	classifiers=[
 		'Development Status :: 5 - Production/Stable',
 		'Intended Audience :: Developers',
-		'License :: OSI Approved :: GPL-3.0',
+		'License :: OSI Approved :: GNU General Public License (GPL)',
 		'Topic :: Software Development',
 		'Topic :: Software Development :: Libraries', 
 		'Programming Language :: Python',

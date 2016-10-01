@@ -50,6 +50,7 @@ Argument __dict__ accept:
 Response __dict__:
 
 * data:  body HTTPResponse (dict if is_json == True)
+* cookies: CookieJAR object
 * content_type:  MIME types
 * status:  status code HTTP
 * is_json:  boolean

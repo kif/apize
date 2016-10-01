@@ -1,5 +1,11 @@
 ## APIze
 
+[![PyPI](https://img.shields.io/pypi/v/apize.svg)](https://pypi.python.org/pypi/apize/)
+[![PyPI](https://img.shields.io/pypi/status/apize.svg)](https://pypi.python.org/pypi/apize/)
+[![PyPI](https://img.shields.io/pypi/pyversions/apize.svg)](https://pypi.python.org/pypi/apize/)
+
+Write quickly and easily to API clients.
+
 ### Installation
 
 ```bash

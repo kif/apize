@@ -13,24 +13,26 @@ def send_request(url, method,
 	"""
 	Forge and send HTTP request.
 	"""
+	## Parse url args
 	for p in args:
 		url = url.replace(':'+p, str(params[p]))
-		
+
 	try:
 		if data:
 			if is_json:
+				headers['Content-Type'] = 'application/json'
 				data = json.dumps(data)
-				
+
 			request = requests.Request(method.upper(), url, data=data, 
 				params=params,headers=headers, cookies=cookies)
 		else:
 			request = requests.Request(method.upper(), url, 
 				params=params, headers=headers, cookies=cookies)
-		
+
 		## Prepare and send HTTP request.
 		session = requests.Session()
 		r = session.send(request.prepare(), timeout=timeout)
-		
+
 	except requests.exceptions.Timeout:
 		return {
 			'data': {}, 
@@ -50,7 +52,7 @@ def send_request(url, method,
 		content_type = r.headers.get('Content-Type', 'text/html')
 		response = r.text
 		isjson = False
-	
+
 	return {
 		'data': response,
 		'cookies': r.cookies,
@@ -68,10 +70,10 @@ def apize(url, method='GET'):
 	def decorator(func):
 		def wrapper(*args, **kwargs):
 			elem = func(*args, **kwargs)
-			
+
 			if type(elem) is not dict:
 				raise BadReturnVarType(func.__name__)
-			
+
 			response = send_request(url, method, 
 				elem.get('data', {}),
 				elem.get('args', {}),
@@ -81,8 +83,8 @@ def apize(url, method='GET'):
 				elem.get('timeout', 8),
 				elem.get('is_json', False)
 			)
-			
+
 			return response
 		return wrapper
-		
+
 	return decorator

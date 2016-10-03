@@ -5,7 +5,7 @@ from __future__ import absolute_import
 import json
 import requests
 from http.cookiejar import CookieJar
-from .exceptions import *
+from apize.exceptions import *
 
 
 def send_request(url, method, 

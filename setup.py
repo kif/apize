@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
 	name = 'apize',
-	version = '0.1.0',
+	version = '0.1.2',
 	author = 'herrersystem',
 	author_email = 'anton.millescamps@evhunter.fr',
 	url = 'http://github.com/herrersystem/apize',

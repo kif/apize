@@ -15,7 +15,7 @@ def send_request(url, method,
 	"""
 	## Parse url args
 	for p in args:
-		url = url.replace(':'+p, str(params[p]))
+		url = url.replace(':' + p, str(args[p]))
 
 	try:
 		if data:

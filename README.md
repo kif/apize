@@ -51,8 +51,9 @@ Argument __dict__ accept:
 * data.
 * headers.
 * cookies.
-* timeout (int), default 8 seconds.
-* is_json (boolean), if data must be convert to json.
+* timeout (int), (default 8 seconds).
+* is_json (boolean), if data must be convert to json (default: False).
+* verify_cert (boolean), allow or disallow verification SSL Cert (default: False).
 
 Response __dict__:
 

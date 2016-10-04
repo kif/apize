@@ -8,8 +8,8 @@ from http.cookiejar import CookieJar
 from apize.exceptions import *
 
 
-def send_request(url, method, 
-	data, args, params, headers, cookies, timeout, is_json):
+def send_request(url, method, data, 
+	args, params, headers, cookies, timeout, is_json, verify_cert):
 	"""
 	Forge and send HTTP request.
 	"""
@@ -23,11 +23,15 @@ def send_request(url, method,
 				headers['Content-Type'] = 'application/json'
 				data = json.dumps(data)
 
-			request = requests.Request(method.upper(), url, data=data, 
-				params=params,headers=headers, cookies=cookies)
+			request = requests.Request(
+				method.upper(), url, data=data, params=params, 
+				headers=headers, cookies=cookies, verify=verify_cert
+			)
 		else:
-			request = requests.Request(method.upper(), url, 
-				params=params, headers=headers, cookies=cookies)
+			request = requests.Request(
+				method.upper(), url, params=params, headers=headers, 
+				cookies=cookies, verify=verify_cert
+			)
 
 		## Prepare and send HTTP request.
 		session = requests.Session()
@@ -81,7 +85,8 @@ def apize(url, method='GET'):
 				elem.get('headers', {}),
 				elem.get('cookies', {}),
 				elem.get('timeout', 8),
-				elem.get('is_json', False)
+				elem.get('is_json', False),
+				elem.get('verify_cert', False)
 			)
 
 			return response

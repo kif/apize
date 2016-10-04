@@ -14,53 +14,90 @@ pip install apize
 
 ### Get started
 
+#### If your script use 1 API, use __Apize__ class:
+
 ```python
-from apize.decorators import apize
+from apize.apize import Apize
 
-API_KEY = 'hfbehbf...'
-API = 'https://maps.googleapis.com/maps/api/place'
+app = Apize('https://maps.googleapis.com/maps/api')
 
 
-@apize(API + '/autocomplete/json')
-def autocomplete_place(query):
+@app.call('/place/autocomplete/json')
+def autocomplete_city(query):
 	'''
 	https://developers.google.com/places/web-service/autocomplete
 	'''
 	params = {
 		'input': query,
-		'key': API_KEY,
+		'key': key,
 		'types': '(cities)'
 	}
 	
 	return {'params': params}
 
 
+@app.call('/place/add/json', method='POST')
+def add_place(key):
+	'''
+	https://developers.google.com/places/web-service/add-place
+	'''
+	data = {
+		"location": {
+			"lat": -33.8669710,
+			"lng": 151.1958750
+		},
+		"accuracy": 50,
+		"name": "Google Shoes!",
+		"phone_number": "(02) 9374 4000",
+		"address": "48 Pirrama Road, Pyrmont, NSW 2009, Australia",
+		"types": ["shoe_store"],
+		"website": "http://www.google.com.au/",
+		"language": "fr-FR"
+	}
+	params = {'key': key}
+
+	return {'data': data, 'params': params}
+
+
 if __name__ == "__main__":
-	response = autocomplete_place('Par')
+	key = 'hfbehbf...'
 	
-	print(response['status'])
-	print(response['data'])
+	resp1 = add_place(key)
+	resp2 = autocomplete_city('Dij', key)
 ```
 
-More examples on __examples/__ directory.
 
-Argument __dict__ accept:
+#### If your script use 1 API, use apize_raw decorator:
 
-* params (params in url ex: ?v=10).
-* args (args to parse in url ex: /solid/:rock).
-* data.
-* headers.
-* cookies.
-* timeout (int), (default 8 seconds).
-* is_json (boolean), if data must be convert to json (default: False).
-* verify_cert (boolean), get path to verify cert or disallow verification SSL Cert (default: False).
+```
+from apize.decorators import apize_raw
 
-Response __dict__:
+api_recaptcha = 'https://www.google.com/recaptcha/api'
 
-* data:  body HTTPResponse (dict if is_json == True)
-* cookies: CookieJAR object
-* content_type:  MIME types
-* status:  status code HTTP
-* is_json:  boolean
-* timeout:  boolean (if requests.exceptions.Timeout is raised).
+
+@apize_raw(api_recaptcha + '/siteverify', method='POST')
+def verify_response(private_key, response):
+	'''
+	https://developers.google.com/recaptcha/docs/verify
+	'''
+	data = {'secret': private_key, 'response': reponse}
+	
+	return {'data': data}
+
+
+@apize_raw('http://mafreebox.free.fr/api_version')
+def get_api_config():
+	'''
+	http://dev.freebox.fr/sdk/os/
+	'''
+	return {}
+
+
+if __name__ == "__main__":
+	resp1 = verify_response('fehzbhz...', 'dajzdjaiz...')
+	resp2 = get_api_config()
+```
+
+
+Documentation in preparation ...
 

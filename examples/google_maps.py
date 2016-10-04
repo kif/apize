@@ -1,28 +1,26 @@
 #!/usr/bin/env python3
 
-from apize.decorators import apize
+from apize.apize import Apize
 
-API_KEY = 'hfbehbf...'
-API = 'https://maps.googleapis.com/maps/api/place'
+app = Apize('https://maps.googleapis.com/maps/api')
 
 
-@apize(API + '/autocomplete/json')
-def autocomplete_place(query):
+@app.call('/place/autocomplete/json')
+def autocomplete_city(query):
 	'''
 	https://developers.google.com/places/web-service/autocomplete
 	'''
 	params = {
 		'input': query,
-		'key': API_KEY,
+		'key': key,
 		'types': '(cities)'
 	}
 	
 	return {'params': params}
 
 
-
-@apize(API + '/add/json', method='POST')
-def add_place():
+@app.call('/place/add/json', method='POST')
+def add_place(key):
 	'''
 	https://developers.google.com/places/web-service/add-place
 	'''
@@ -39,18 +37,14 @@ def add_place():
 		"website": "http://www.google.com.au/",
 		"language": "fr-FR"
 	}
-	params = {'key': API_KEY}
+	params = {'key': key}
 
 	return {'data': data, 'params': params}
 
 
 if __name__ == "__main__":
-	response = add_place()
+	key = 'hfbehbf...'
 	
-	print(response['status'])
-	print(response['data'])
-	
-	response = autocomplete_place('Par')
-	
-	print(response['status'])
-	print(response['data'])
+	resp1 = add_place(key)
+	resp2 = autocomplete_city('Dij', key)
+

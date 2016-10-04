@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 
-from apize.decorators import apize
+from apize.apize import Apize
+
+app = Apize('https://www.google.com/recaptcha/api')
 
 
-API = 'https://www.google.com'
-
-@apize(domain + '/recaptcha/api/siteverify', method='POST')
+@app.call('/siteverify', method='POST')
 def verify_response(private_key, response):
 	'''
 	https://developers.google.com/recaptcha/docs/verify
 	'''
-	data = {"secret": private_key, "response": reponse}
+	data = {'secret': private_key, 'response': reponse}
 	
 	return {'data': data}
 	

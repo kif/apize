@@ -60,7 +60,7 @@ app = Apize('https://myapi.com/api')
 
 @app.call('/maps/:lat/:long/')
 def get_map(key, zoom)
-	args = {'lat': '47.331881, 'long': '5.032221,12'}
+	args = {'lat': '47.331881, 'long': '5.032221'}
 	params = {'zoom': 12}
 	
 	## Final url : 

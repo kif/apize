@@ -39,9 +39,9 @@ Accept 2 args:
 * path (__str__) : requests path (ex: /foo/bar/)
 * method (__str__) : http method (default: GET)
 
-Your function must be decored by call decorator and must be return a dict.
+Your function must be decorated by call method and must be return a dict.
 
-Dict accept 8 args:
+Dict may contain 8 elements:
 * data (__dict__ or __str__) : body request
 * args (__dict__) : args to parse url (ex: /foo/:bar/)
 * params (__dict__) : params in url (ex: ?id=12)

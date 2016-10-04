@@ -67,9 +67,9 @@ if __name__ == "__main__":
 ```
 
 
-#### If your script use 1 API, use apize_raw decorator:
+#### If your script use multiple APIs, use apize_raw decorator:
 
-```
+```python
 from apize.decorators import apize_raw
 
 api_recaptcha = 'https://www.google.com/recaptcha/api'

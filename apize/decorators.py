@@ -25,16 +25,17 @@ def send_request(url, method, data,
 
 			request = requests.Request(
 				method.upper(), url, data=data, params=params, 
-				headers=headers, cookies=cookies, verify=verify_cert
+				headers=headers, cookies=cookies
 			)
 		else:
 			request = requests.Request(
 				method.upper(), url, params=params, headers=headers, 
-				cookies=cookies, verify=verify_cert
+				cookies=cookies
 			)
 
 		## Prepare and send HTTP request.
 		session = requests.Session()
+		session.verify = verify_cert
 		r = session.send(request.prepare(), timeout=timeout)
 
 	except requests.exceptions.Timeout:

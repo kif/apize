@@ -20,8 +20,9 @@ pip install apize
 from apize.apize import Apize
 ```
 
-Accept 2 args:
+Accept 3 args:
 * api_url (__str__) : your url base (ex: https://myapi.com/api)
+* headers (__dict__) : http headers (for any API requests)
 * ssl_cert (__str__ or __bool__) : your ssl cert file path (if necessary)
 
 #### example
@@ -45,7 +46,7 @@ Dict may contain 8 elements:
 * data (__dict__ or __str__) : body request
 * args (__dict__) : args to parse url (ex: /foo/:bar/)
 * params (__dict__) : params in url (ex: ?id=12)
-* headers (__dict__) : http headers 
+* headers (__dict__) : override Apize.headers for special case
 * cookies (__dict__) : http cookies
 * timout (__int__) : set a timeout for request (default: 8 seconds)
 * is_json (__bool__) : define if data args must be parsed in json.

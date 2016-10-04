@@ -8,7 +8,7 @@ from http.cookiejar import CookieJar
 
 
 def send_request(url, method, data, 
-	args, params, headers, cookies, timeout, is_json, verify_cert):
+	args, params, headers, cookies, timeout, is_json, ssl_cert):
 	"""
 	Forge and send HTTP request.
 	"""
@@ -34,7 +34,7 @@ def send_request(url, method, data,
 
 		## Prepare and send HTTP request.
 		session = requests.Session()
-		session.verify = verify_cert
+		session.verify = ssl_cert
 		r = session.send(request.prepare(), timeout=timeout)
 
 	except requests.exceptions.Timeout:

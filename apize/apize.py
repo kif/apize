@@ -8,10 +8,10 @@ from apize.http_request import send_request
 
 class Apize():
 	
-	def __init__(self, api_url, headers={}, ssl_cert=False):
+	def __init__(self, api_url, headers={}, verify_cert=False):
 		self.api_url = api_url
 		self.headers = headers
-		self.ssl_cert = ssl_cert
+		self.verify_cert = verify_cert
 
 	def call(self, path, method='GET'):
 		def decorator(func):
@@ -35,7 +35,7 @@ class Apize():
 					elem.get('cookies', {}),
 					elem.get('timeout', 8),
 					elem.get('is_json', False),
-					elem.get('ssl_cert', self.ssl_cert)
+					elem.get('verify_cert', self.verify_cert)
 				)
 
 				return response

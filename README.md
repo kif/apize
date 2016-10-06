@@ -23,7 +23,7 @@ from apize.apize import Apize
 Accept 3 args:
 * api_url (__str__) : your url base (ex: https://myapi.com/api)
 * headers (__dict__) : http headers (for any API requests)
-* verify_cert (__bool__) : enable SSL cert verification
+* verify_cert (__bool__ or __str__) : disable SSL cert verification or get certfile path.
 
 #### example
 ```python
@@ -31,7 +31,7 @@ from apize.apize import Apize
 
 app = Apize('https://myapi.com/api')
 ## With auto-signed ssl cert and allowed verification.
-app_https = Apize('https://myapi.com/api', verify_cert=True)
+app_https = Apize('https://myapi.com/api', verify_cert='/path/to/certfile')
 ```
 
 ### Call decorator
@@ -50,7 +50,7 @@ Dict may contain 8 elements:
 * cookies (__dict__) : http cookies
 * timout (__int__) : set a timeout for request (default: 8 seconds)
 * is_json (__bool__) : define if data args must be parsed in json.
-* verify_cert (__bool__) : override Apize.verify_cert for special case
+* verify_cert (__bool__ or __str__) : override Apize.verify_cert for special case
 
 
 #### example

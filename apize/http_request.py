@@ -7,18 +7,6 @@ import requests
 from http.cookiejar import CookieJar
 
 
-def get_certificate(addr, port):
-	import ssl
-	
-	cert = ssl.get_server_certificate((host, port))
-	filename = '.cert/%.pem'
-	
-	with open('.cert/%.pem', 'w') as f:
-		f.write(cert)
-	
-	return filename
-	
-
 def send_request(url, method, data, 
 	args, params, headers, cookies, timeout, is_json, verify_cert):
 	"""

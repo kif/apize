@@ -8,7 +8,7 @@ from apize.http_request import send_request
 
 class Apize():
 	
-	def __init__(self, api_url, headers={}, verify_cert=False):
+	def __init__(self, api_url, headers={}, verify_cert=True):
 		self.api_url = api_url
 		self.headers = headers
 		self.verify_cert = verify_cert

@@ -23,7 +23,7 @@ from apize.apize import Apize
 Accept 3 args:
 * api_url (__str__) : your url base (ex: https://myapi.com/api)
 * headers (__dict__) : http headers (for any API requests)
-* verify_cert (__bool__ or __str__) : disable SSL cert verification or get certfile path.
+* verify_cert (__bool__ or __str__) : disable SSL cert verification or get certfile path. (default True)
 
 #### example
 ```python

@@ -21,6 +21,7 @@ class Apize():
 				if type(elem) is not dict:
 					raise BadReturnVarType(func.__name__)
 
+				## Merge urloc + path
 				absolute_url = self.api_url + path
 
 				## Merge global headers and custom headers.

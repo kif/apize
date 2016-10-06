@@ -36,6 +36,7 @@ def send_request(url, method, data,
 		session = requests.Session()
 		session.verify = verify_cert
 		r = session.send(request.prepare(), timeout=timeout)
+		session.close()
 
 	except requests.exceptions.Timeout:
 		return {

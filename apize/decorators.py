@@ -25,7 +25,7 @@ def apize_raw(url, method='GET'):
 				elem.get('cookies', {}),
 				elem.get('timeout', 8),
 				elem.get('is_json', False),
-				elem.get('verify_cert', False)
+				elem.get('verify_cert', True)
 			)
 
 			return response

@@ -4,7 +4,11 @@ from __future__ import absolute_import
 
 import json
 import requests
-from http.cookiejar import CookieJar
+import sys
+if sys.version_info[0] < 3:
+    from cookielib import CookieJar
+else:
+    from http.cookiejar import CookieJar
 
 
 def send_request(url, method, data, 
